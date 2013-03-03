@@ -1,6 +1,6 @@
 module EventMachine
   module Synchrony
-    class TCPSocket < Connection
+    class TCPSocket < EM::Connection
       class << self
         alias_method :_old_new, :new
         def new(*args)
@@ -54,7 +54,7 @@ module EventMachine
       end
 
       # TCPSocket interface
-      def setsockopt(level, name, value); end
+      alias :setsockopt :set_sock_opt
 
       def send(msg, flags)
         raise "Unknown flags in send(): #{flags}" if flags.nonzero?
